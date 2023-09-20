@@ -1,3 +1,4 @@
+#Memory in prompt.
 from pathlib import Path
 import streamlit as st
 #from streamlit_chat import message
@@ -13,7 +14,7 @@ from time import sleep
 #from streamlit_extras.add_vertical_space import add_vertical_space
 
 st.set_page_config(page_title="AI Chatbot 100% Free", layout="wide")
-st.subheader('完全开源免费的AI智能聊天助手 | Absolute Free & Opensouce AI Chatbot')
+st.write('完全开源免费的AI智能聊天助手 | Absolute Free & Opensouce AI Chatbot')
 
 # --- PATH SETTINGS ---
 css_file = "main.css"
@@ -51,7 +52,7 @@ def starchat(model,myprompt, your_template):
     And output your RESPONSE ONLY, do NOT OUTPUT the chat history or ANY unrelated information!
     AI Repsonse:
     """
-#以上是新增内容      
+#以上是新增内容    
     template = my_prompt_template
 #    template = your_template
     prompt = PromptTemplate(template=template, input_variables=["contexts", "myprompt"])
