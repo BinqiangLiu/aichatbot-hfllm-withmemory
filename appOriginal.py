@@ -55,8 +55,12 @@ def starchat(model,myprompt, your_template):
     st.write("Combined User Input as Prompt - i.e. final input prompt for LLM:")
     st.write(myprompt)
     st.write("---在def starchat(model,myprompt, your_template)内的信息打印输出结束 - 即myprompt的内容")
-    llm_reply = llm_chain.run(myprompt)    
+    st.write("开始调用LLM Chain进行AI Response")
+    llm_reply = llm_chain.run(myprompt)
+    st.write("开始调用LLM Chain进行AI Response")
+    st.write("对LLM Chain的AI Response清理格式")
     reply = llm_reply.partition('<|end|>')[0]
+    st.write("LLM Chain的AI Response格式清理结束")
     return reply
 
 if "file_name" not in st.session_state:
