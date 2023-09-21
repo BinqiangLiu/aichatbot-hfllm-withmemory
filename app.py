@@ -115,7 +115,7 @@ if myprompt := st.chat_input("Enter your question here."):
                 sleep(0.1)                        
             st.markdown("st.markdown方法显示：assistant的本次/当前回复结果显示位置到这里结束 - 输出结束...")            
             st.write("开始显示完整的AI Response")
-            message_placeholder.markdown(full_response)
+            #message_placeholder.markdown(full_response)
             st.write("完整的AI Response显示结束")
             asstext = f"assistant: {full_response}" 
             contexts = writehistory(asstext)
