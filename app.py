@@ -28,7 +28,7 @@ repo_id=os.getenv("repo_id")
 #av_ass = './robot.png'
 av_us = '🧑'
 av_ass = '🤖'
-# Set a default model
+
 #if "hf_model" not in st.session_state:
 #    st.session_state["hf_model"] = "HuggingFaceH4/starchat-beta"
 
@@ -95,8 +95,8 @@ if myprompt := st.chat_input("Enter your question here."):
         st.markdown(myprompt)
         st.write("---用户的当前输入问题显示结束---")
         usertext = f"user: {myprompt}"      
-        contexts = writehistory(usertext)  
         st.write("在用户当前输入问题的模块调用writehistory写入聊天历史记录的函数/方法，会打印输出文件名称，并输出此时的user-contexts内容")        
+        contexts = writehistory(usertext)          
     with st.chat_message("assistant"):
         with st.spinner("AI Thinking..."):            
             st.markdown("st.markdown方法显示：assistant的本次/当前回复结果显示位置从这里开始 - 输出开始...")
@@ -118,7 +118,7 @@ if myprompt := st.chat_input("Enter your question here."):
             #message_placeholder.markdown(full_response)
             st.write("完整的AI Response显示结束")
             asstext = f"assistant: {full_response}" 
-            contexts = writehistory(asstext)
-            st.write("在assistant当前回复的模块调用writehistory写入聊天历史记录的函数/方法，也会打印输出文件名称，并输出此时的assitant-contexts内容")            
+            st.write("在assistant当前回复的模块调用writehistory写入聊天历史记录的函数/方法，也会打印输出文件名称，并输出此时的assitant-contexts内容")  
+            contexts = writehistory(asstext)                      
             st.write("st.chat_message的assistant之contexts（这里会将当前/本次的AI回复内容追加到contexts末尾）: "+contexts)
             st.session_state.messages.append({"role": "assistant", "content": full_response})
