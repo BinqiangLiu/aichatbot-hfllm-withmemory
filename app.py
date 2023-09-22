@@ -37,17 +37,29 @@ def starchat(model,myprompt, your_template):
                                        "max_new_tokens":1024, "do_sample":True,
                                        "temperature":0.1,
                                        "top_k":50,
-                                       "top_p":0.95, "eos_token_id":49155})
-    template = your_template
-    prompt = PromptTemplate(template=template, input_variables=["myprompt"])
+                                       "top_p":0.95, "eos_token_id":49155})    
+    my_prompt_template = """assistant is a very smart and helpful AI assistant. assistant should consult the Chat History between user and assistant before responding to current user question. If assistant find the Chat History not helpful in responding to the current user question, just ignore the Chat History and proceed to response to current user question without the Chat History. assistant should only output the essential contents of the response, do not output any unmeaningful information.
+    Chat History: {contexts}
+    current user question: {myprompt}
+    assistant:
+    """
+    #my_prompt_template = """You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe.  Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature. If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information. In each conversation, question is placed after [user] while your answer should be placed after [assistant]. By looking [user] and [assistant], you must consider multi-turn conversations which is provided after [chat history].
+    #[chat history]: {contexts}
+    #[user]: {myprompt}
+    #[assistant]:
+    #"""    
+    template = my_prompt_template
+    #template = your_template  
+    prompt = PromptTemplate(template=template, input_variables=["contexts", "myprompt"])
     llm_chain = LLMChain(prompt=prompt, llm=llm)
-    add_notes_1="Beginning of chat history:\n"
-    add_notes_2="End of chat history.\n"
-    add_notes_3="Please consult the above chat history before responding to the user question below.\n"
-    add_notes_4="User question: "
-    myprompt_temp=myprompt
-    myprompt = add_notes_1 + "\n" + contexts + "\n" + add_notes_2 + "\n" + add_notes_3 + "\n"+ add_notes_4 + "\n" + myprompt
-    llm_reply = llm_chain.run(myprompt)
+   # add_notes_1="Beginning of chat history:\n"
+   # add_notes_2="End of chat history.\n"
+   # add_notes_3="Please consult the above chat history before responding to the user question below.\n"
+   # add_notes_4="User question: "
+   # myprompt_temp=myprompt
+   # myprompt = add_notes_1 + "\n" + contexts + "\n" + add_notes_2 + "\n" + add_notes_3 + "\n"+ add_notes_4 + "\n" + myprompt
+   # llm_reply = llm_chain.run(myprompt)
+    llm_reply = llm_chain.run({'contexts': contexts, 'myprompt': myprompt})  
     reply = llm_reply.partition('<|end|>')[0]    
     return reply
 
