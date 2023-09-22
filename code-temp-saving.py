@@ -211,4 +211,14 @@ if myprompt := st.chat_input("Enter your question here."):
             asstext = f"assistant: {full_response}"             
             contexts = writehistory(asstext)            
             st.session_state.messages.append({"role": "assistant", "content": full_response})
-
+#下面是参考https://huggingface.co/spaces/chansung/llama2-with-gradio-chat对my_prompt_template的prompt进行了修改，测试效果
+    #my_prompt_template = """assistant is a very smart and helpful AI assistant. assistant should consult the Chat History between user and assistant before responding to current user question. If assistant find the Chat History not helpful in responsing to the current user question, just ignore the Chat History and proceed to response to the user question without the Chat History. as usual. assistant should only output the essential contents of the response, do not output any unmeaningful information.
+    #Chat History: {contexts}
+    #current user question: {myprompt}
+    #assistant:
+    #"""
+    my_prompt_template = """You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe.  Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature. If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information. In each conversation, question is placed after [user] while your answer should be placed after [assistant]. By looking [user] and [assistant], you must consider multi-turn conversations which is provided after [chat history].
+    [chat history]: {contexts}
+    [user]: {myprompt}
+    [assistant]:
+    """    
