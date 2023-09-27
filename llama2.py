@@ -34,16 +34,16 @@ av_ass = '🤖'
 
 #def starchat(model, myprompt, my_prompt_template):
 def starchat(model, myprompt): 
-    #llm = HuggingFaceHub(repo_id=model,
-    #                     model_kwargs={"min_length":100,
-    #                                   "max_new_tokens":1024, "do_sample":True,
-    #                                   "temperature":0.1,
-    #                                   "top_k":50,
-    #                                   "top_p":0.95, "eos_token_id":49155})     
+    llm = HuggingFaceHub(repo_id=model,
+                         model_kwargs={"min_length":1024,
+                                       "max_new_tokens":32768, "do_sample":True,
+                                       "temperature":0.1,
+                                       "top_k":50,
+                                       "top_p":0.95, "eos_token_id":49155})     
 
     #llm = HuggingFaceHub(repo_id = model, HUGGINGFACEHUB_API_TOKEN=HUGGINGFACEHUB_API_TOKEN, model_kwargs={"temperature":0.5, "max_length":4096})   
     #llm = HuggingFaceHub(repo_id = model, model_kwargs={"temperature":0.5, "max_length":4096})  
-    llm = HuggingFaceHub(repo_id = model, model_kwargs={"temperature":0.5, "max_length":40960})     
+    #llm = HuggingFaceHub(repo_id = model, model_kwargs={"temperature":0.5, "max_length":40960})     
     my_prompt_template = """
     <<SYS>>You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe.  Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
     If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information.
