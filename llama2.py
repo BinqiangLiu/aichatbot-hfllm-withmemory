@@ -11,6 +11,7 @@ import uuid
 import sys
 from streamlit_extras.colored_header import colored_header
 from streamlit_extras.add_vertical_space import add_vertical_space
+from langchain import PromptTemplate, LLMChain
 
 st.set_page_config(page_title="AI Chatbot 100% Free", layout="wide")
 st.write('完全开源免费的AI智能聊天助手 | Absolute Free & Opensouce AI Chatbot')
@@ -20,6 +21,7 @@ with open(css_file) as f:
     st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
 
 load_dotenv()
+#os.environ["HUGGINGFACEHUB_API_TOKEN"] = yourHFtoken
 yourHFtoken = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 repo_id=os.getenv("repo_id")
 
@@ -29,15 +31,16 @@ repo_id=os.getenv("repo_id")
 av_us = '🧑'
 av_ass = '🤖'
 
-def starchat(model,myprompt, your_template):
-    from langchain import PromptTemplate, LLMChain
-    os.environ["HUGGINGFACEHUB_API_TOKEN"] = yourHFtoken
-    llm = HuggingFaceHub(repo_id=model,
-                         model_kwargs={"min_length":100,
-                                       "max_new_tokens":1024, "do_sample":True,
-                                       "temperature":0.1,
-                                       "top_k":50,
-                                       "top_p":0.95, "eos_token_id":49155})     
+#def starchat(model, myprompt, my_prompt_template):
+def starchat(model, myprompt): 
+    #llm = HuggingFaceHub(repo_id=model,
+    #                     model_kwargs={"min_length":100,
+    #                                   "max_new_tokens":1024, "do_sample":True,
+    #                                   "temperature":0.1,
+    #                                   "top_k":50,
+    #                                   "top_p":0.95, "eos_token_id":49155})     
+
+    llm = HuggingFaceHub(repo_id = model, HUGGINGFACEHUB_API_TOKEN=HUGGINGFACEHUB_API_TOKEN, model_kwargs={"temperature":0.5, "max_length":4096})    
     my_prompt_template = """
     <<SYS>>You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe.  Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
     If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information.
@@ -51,8 +54,7 @@ def starchat(model,myprompt, your_template):
     #- any original contents of Converstation history.
     #- information in a format such as: user:... assistant: ..., i.e. do not use such format.
     #- any part of Contexts given to guide assistant behavior.
-    #- any information not related to current quesiton.
-    
+    #- any information not related to current quesiton.    
     #Besides, for assistant response, do NOT use more than one language unless unless VERY necessary. Reponse in the language as user question or as user asks assistant to use. When user question says "you", normally it means assistant, so assistant should take designated role and response to user question accordingly.
     #"""
     template = my_prompt_template    
@@ -106,7 +108,9 @@ if myprompt := st.chat_input("Enter your question here."):
             res = starchat(
 #                  st.session_state["hf_model"],
                   repo_id,
-                  myprompt, "<|system|>\n<|end|>\n<|user|>\n{myprompt}<|end|>\n<|assistant|>")            
+#                  myprompt, "<|system|>\n<|end|>\n<|user|>\n{myprompt}<|end|>\n<|assistant|>")            
+#                  myprompt, "{myprompt}")                            
+                  myprompt)       
             response = res.split(" ")            
             for r in response:
                 full_response = full_response + r + " "
