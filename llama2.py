@@ -22,7 +22,8 @@ with open(css_file) as f:
 
 load_dotenv()
 #os.environ["HUGGINGFACEHUB_API_TOKEN"] = yourHFtoken
-yourHFtoken = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+#yourHFtoken = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 repo_id=os.getenv("repo_id")
 
 #AVATARS
