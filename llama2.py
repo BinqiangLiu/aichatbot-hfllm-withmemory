@@ -40,7 +40,9 @@ def starchat(model, myprompt):
                                        "temperature":0.1,
                                        "top_k":50,
                                        "top_p":0.95, "eos_token_id":49155})     
-
+#设置"max_new_tokens"参数的时候要注意，预先考虑到用户的输入占用tokens数，否则容易出现下面的错误：
+#ValueError: Error raised by inference API: Input validation error: `inputs` tokens + `max_new_tokens` must be <= 8192.
+#Given: 388 `inputs` tokens and 8192 `max_new_tokens` ---就是说，LLM最大支持8192个Tokens
     #llm = HuggingFaceHub(repo_id = model, HUGGINGFACEHUB_API_TOKEN=HUGGINGFACEHUB_API_TOKEN, model_kwargs={"temperature":0.5, "max_length":4096})   
     #llm = HuggingFaceHub(repo_id = model, model_kwargs={"temperature":0.5, "max_length":4096})  
     #llm = HuggingFaceHub(repo_id = model, model_kwargs={"temperature":0.5, "max_length":40960})     
