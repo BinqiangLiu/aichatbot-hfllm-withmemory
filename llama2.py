@@ -38,7 +38,7 @@ def starchat(model,myprompt, your_template):
                                        "temperature":0.1,
                                        "top_k":50,
                                        "top_p":0.95, "eos_token_id":49155})     
-     my_prompt_template = """
+    my_prompt_template = """
     <<SYS>>You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe.  Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
     If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information.
     In each conversation, question is placed after [INST] while your answer should be placed after [/INST]. By looking [INST] and [/INST], you must consider multi-turn conversations saved in {contexts}.<</SYS>>
