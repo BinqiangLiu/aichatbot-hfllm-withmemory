@@ -6,3 +6,5 @@ python-dotenv
 altair
 streamlit_chat
 streamlit_extras
+flask
+gunicorn
