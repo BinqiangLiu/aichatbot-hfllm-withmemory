@@ -97,7 +97,7 @@ def chatbot():
     
     #return jsonify(response)        
     #initial_response = llm_chain.run(user_query)
-    return jsonify({'response': output_response}) #JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+    #return jsonify({'response': output_response}) #JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     #尝试修改1
     return jsonify({'response': output_response[reply]})   
 
