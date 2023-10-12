@@ -42,7 +42,7 @@ def starchat(model, myprompt):
     reply = llm_reply.partition('<|end|>')[0]    
     return reply
 
-@app.route('api/chatbot', methods=['POST'])
+@app.route('/api/chatbot', methods=['POST'])
 def chatbot():
     data = request.get_json
     myprompt = data['prompt']
