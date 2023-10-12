@@ -21,6 +21,8 @@ HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 repo_id = os.getenv("repo_id")
 port = os.getenv('port')
 
+output_response
+
 def starchat(model, myprompt): 
     llm = HuggingFaceHub(repo_id=model,
                          model_kwargs={"min_length":1024,
@@ -50,7 +52,10 @@ def chatbot():
     # AI Chatbot logic
     if "file_name" not in st.session_state:
         st.session_state["file_name"] = str(uuid.uuid4()) + ".txt"    
-
+        
+    if "output_response" not in st.session_state:
+        st.session_state.output_response = {}
+        
     def writehistory(text):           
         with open(st.session_state["file_name"], 'a+') as f:
             f.write(text)
@@ -88,20 +93,23 @@ def chatbot():
             asstext = f"assistant: {full_response}"             
             contexts = writehistory(asstext)            
             st.session_state.messages.append({"role": "assistant", "content": full_response})
+            st.session_state.output_response={"content": full_response}
 
     #output_response = {
     #    'message': 'AI Chatbot response',
     #    'prompt': myprompt,
     #    'reply': full_response
     #}
-    output_response = full_response
+    #output_response = full_response
     #return jsonify(response)        
     #initial_response = llm_chain.run(user_query)
     #return jsonify({'response': output_response}) #JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     #尝试修改1
     #return jsonify({'response': output_response[reply]})  
     #尝试修改2
-    return jsonify({'response': output_response}) 
+    #return jsonify({'response': output_response}) 
+    #尝试修改3
+    return jsonify({'response': st.session_state.output_response}) 
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)
