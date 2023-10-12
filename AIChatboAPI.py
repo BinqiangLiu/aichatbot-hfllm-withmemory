@@ -21,8 +21,6 @@ HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 repo_id = os.getenv("repo_id")
 port = os.getenv('port')
 
-output_response
-
 def starchat(model, myprompt): 
     llm = HuggingFaceHub(repo_id=model,
                          model_kwargs={"min_length":1024,
