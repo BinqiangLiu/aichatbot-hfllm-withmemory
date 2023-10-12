@@ -44,7 +44,7 @@ def starchat(model, myprompt):
 
 @app.route('/api/chatbot', methods=['POST'])
 def chatbot():
-    data = request.get_json
+    data = request.get_json()
     myprompt = data['prompt']
     
     # AI Chatbot logic
