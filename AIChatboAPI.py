@@ -19,6 +19,7 @@ app = Flask(__name__)
 load_dotenv()
 HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 repo_id = os.getenv("repo_id")
+port = os.getenv('port')
 
 def starchat(model, myprompt): 
     llm = HuggingFaceHub(repo_id=model,
