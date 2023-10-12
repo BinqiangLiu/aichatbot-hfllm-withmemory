@@ -91,7 +91,8 @@ def chatbot():
             asstext = f"assistant: {full_response}"             
             contexts = writehistory(asstext)            
             st.session_state.messages.append({"role": "assistant", "content": full_response})
-            st.session_state.output_response={"content": full_response}
+            #st.session_state.output_response={"content": full_response}
+            st.session_state.output_response={"content": "NICE MEETING YOU"}
 
     #output_response = {
     #    'message': 'AI Chatbot response',
