@@ -65,6 +65,9 @@ def chat():
             contexts = f.read()        
         return contexts
 
+    if "full_response" not in st.session_state:
+       st.session_state.full_response = ""  
+        
     if "messages" not in st.session_state:
        st.session_state.messages = []
     for message in st.session_state.messages:
@@ -83,19 +86,20 @@ def chat():
     with st.chat_message("assistant"):
         with st.spinner("AI Thinking..."):                        
             message_placeholder = st.empty() 
-            full_response = ""            
+            #full_response = ""            
             res = starchat(repo_id, myprompt)       
             response = res.split(" ")            
             for r in response:
-                full_response = full_response + r + " "
-                message_placeholder.markdown(full_response + "|")
+                #full_response = full_response + r + " "
+                st.session_state.full_response = st.session_state.full_response + r + " "                
+                message_placeholder.markdown(st.session_state.full_response + "|")
                 sleep(0.1)                       
-            message_placeholder.markdown(full_response)            
-            asstext = f"assistant: {full_response}"             
+            message_placeholder.markdown(st.session_state.full_response)            
+            asstext = f"assistant: {st.session_state.full_response}"             
             contexts = writehistory(asstext)            
-            st.session_state.messages.append({"role": "assistant", "content": full_response})
+            st.session_state.messages.append({"role": "assistant", "content": st.session_state.full_response})
 
-    return jsonify({"response": full_response})
+    return jsonify({"response": st.session_state.full_response})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)
