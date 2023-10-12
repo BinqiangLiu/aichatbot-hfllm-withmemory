@@ -14,6 +14,12 @@ from streamlit_extras.colored_header import colored_header
 from streamlit_extras.add_vertical_space import add_vertical_space
 from langchain import PromptTemplate, LLMChain
 
+load_dotenv()
+HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+repo_id = os.getenv("repo_id")
+port = os.getenv('port')
+model = os.getenv('model')
+
 app = Flask(__name__)
 
 @app.route('/chat', methods=['POST'])
@@ -21,11 +27,6 @@ def chat():
     data = request.get_json()
     model = data['model']
     myprompt = data['question']
-
-    load_dotenv()
-
-    HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
-    repo_id = os.getenv("repo_id")
 
     av_us = '🧑'
     av_ass = '🤖'
