@@ -42,9 +42,9 @@ def starchat(model, myprompt):
     reply = llm_reply.partition('<|end|>')[0]    
     return reply
 
-@app.route('/chatbot', methods=['POST'])
+@app.route('api/chatbot', methods=['POST'])
 def chatbot():
-    data = request.json
+    data = request.get_json
     myprompt = data['prompt']
     
     # AI Chatbot logic
@@ -89,13 +89,15 @@ def chatbot():
             contexts = writehistory(asstext)            
             st.session_state.messages.append({"role": "assistant", "content": full_response})
 
-    response = {
+    output_response = {
         'message': 'AI Chatbot response',
         'prompt': myprompt,
         'reply': full_response
     }
     
-    return jsonify(response)
+    #return jsonify(response)        
+    #initial_response = llm_chain.run(user_query)
+    return jsonify({'response': output_response})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)
