@@ -22,7 +22,7 @@ model = os.getenv('model')
 
 app = Flask(__name__)
 
-@app.route('/chat', methods=['POST'])
+@app.route('/api/chat', methods=['POST'])
 def chat():
     data = request.get_json()
     #model = data['model']
