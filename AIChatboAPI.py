@@ -59,8 +59,8 @@ def writehistory(text):
 
 temp_myprompt = st.chat_input("Enter your question here.")
 
-@app.route('/api/chatbot', methods=['POST'])
-def chatbot():
+@app.route('/api/chat', methods=['POST'])
+def chat():
     data = request.get_json()
     myprompt = data['user_question']    
     temp_myprompt=myprompt
