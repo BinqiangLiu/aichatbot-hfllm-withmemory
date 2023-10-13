@@ -24,6 +24,7 @@ with open(css_file) as f:
 load_dotenv()
 HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 repo_id=os.getenv("repo_id")
+port=os.getenv("port")
 
 av_us = '🧑'
 av_ass = '🤖'
