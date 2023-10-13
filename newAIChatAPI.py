@@ -31,7 +31,7 @@ def chat():
     av_us = '🧑'
     av_ass = '🤖'
 
-    def starchat(model, myprompt): 
+    def starchat(repo_id, myprompt): 
         llm = HuggingFaceHub(repo_id=repo_id,
                              model_kwargs={"min_length":1024,
                                            "max_new_tokens":5632, "do_sample":True,
