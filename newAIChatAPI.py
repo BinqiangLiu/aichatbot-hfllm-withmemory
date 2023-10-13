@@ -25,14 +25,14 @@ app = Flask(__name__)
 @app.route('/chat', methods=['POST'])
 def chat():
     data = request.get_json()
-    model = data['model']
-    myprompt = data['question']
+    #model = data['model']
+    myprompt = data['user_question']
 
     av_us = '🧑'
     av_ass = '🤖'
 
     def starchat(model, myprompt): 
-        llm = HuggingFaceHub(repo_id=model,
+        llm = HuggingFaceHub(repo_id=repo_id,
                              model_kwargs={"min_length":1024,
                                            "max_new_tokens":5632, "do_sample":True,
                                            "temperature":0.1,
