@@ -92,7 +92,7 @@ def chat():
             for r in response:
                 full_response = full_response + r + " "
                 #st.session_state.full_response = st.session_state.full_response + r + " "                
-                message_placeholder.markdown(st.session_state.full_response + "|")
+                message_placeholder.markdown(full_response + "|")
                 sleep(0.1)                       
             message_placeholder.markdown(full_response)            
             asstext = f"assistant: {full_response}"             
