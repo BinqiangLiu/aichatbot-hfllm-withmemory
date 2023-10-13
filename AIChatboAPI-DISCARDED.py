@@ -26,6 +26,9 @@ HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 repo_id = os.getenv("repo_id")
 #port = os.getenv('port')
 
+av_us = '🧑'
+av_ass = '🤖'
+
 def starchat(repo_id, myprompt): 
     llm = HuggingFaceHub(repo_id=repo_id,
                          model_kwargs={"min_length":1024,
@@ -100,18 +103,7 @@ def chat():
             message_placeholder.markdown(full_response)            
             asstext = f"assistant: {full_response}"             
             contexts = writehistory(asstext)            
-            st.session_state.messages.append({"role": "assistant", "content": full_response})            
-            #st.session_state.output_response={"content": full_response}    
-            #st.session_state.output_response={"content": "NICE MEETING YOU"}
-    # return jsonify({'response': output_response}) 
-    #JSONDecodeError: Expecting value: line 1 column 1 (char 0)
-    #尝试修改1
-    #return jsonify({'response': output_response[reply]})  
-    #尝试修改2
-    #return jsonify({'response': output_response}) 
-    #尝试修改3
-    #return jsonify({'response': st.session_state.output_response}) 
-    #尝试修改4    
+            st.session_state.messages.append({"role": "assistant", "content": full_response}) 
     return jsonify({'response': "API TEST"}) 
 
 if __name__ == '__main__':
