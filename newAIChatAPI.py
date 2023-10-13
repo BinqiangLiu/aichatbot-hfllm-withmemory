@@ -74,12 +74,13 @@ for message in st.session_state.messages:
        with st.chat_message(message["role"]):                   
            st.markdown(message["content"])           
 
+temp_myprompt = st.chat_input("Enter your question here.")
+
 app = Flask(__name__)
 @app.route('/api/chat', methods=['POST'])
 def chat():
     data = request.get_json()
-    #model = data['model']
-    temp_myprompt = st.chat_input("Enter your question here.")
+    #model = data['model']    
     myprompt = data['user_question']
     temp_myprompt=myprompt
 #if myprompt := st.chat_input("Enter your question here."):    
