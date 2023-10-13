@@ -19,7 +19,7 @@ app = Flask(__name__)
 load_dotenv()
 HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 repo_id = os.getenv("repo_id")
-port = os.getenv('port')
+#port = os.getenv('port')
 
 def starchat(repo_id, myprompt): 
     llm = HuggingFaceHub(repo_id=repo_id,
@@ -105,4 +105,5 @@ def chatbot():
     return jsonify({'response': full_response}) 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=port)
+    #app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0')
