@@ -90,32 +90,19 @@ def chatbot():
             message_placeholder.markdown(full_response)            
             asstext = f"assistant: {full_response}"             
             contexts = writehistory(asstext)            
-            st.session_state.messages.append({"role": "assistant", "content": full_response})
-            
-            #st.session_state.output_response={"content": full_response}
-    
+            st.session_state.messages.append({"role": "assistant", "content": full_response})            
+            #st.session_state.output_response={"content": full_response}    
             #st.session_state.output_response={"content": "NICE MEETING YOU"}
-            #这个是有问题的，因为这里就已经将st.session_state.output_response赋值字典形式（json格式？）
-            
-            st.session_state.output_response={"NICE MEETING YOU"}    
-
-    #output_response = {
-    #    'message': 'AI Chatbot response',
-    #    'prompt': myprompt,
-    #    'reply': full_response
-    #}
-    #output_response = full_response
-    #return jsonify(response)        
-    #initial_response = llm_chain.run(user_query)
-    #return jsonify({'response': output_response}) #JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+    # return jsonify({'response': output_response}) 
+    #JSONDecodeError: Expecting value: line 1 column 1 (char 0)
     #尝试修改1
     #return jsonify({'response': output_response[reply]})  
     #尝试修改2
     #return jsonify({'response': output_response}) 
     #尝试修改3
     #return jsonify({'response': st.session_state.output_response}) 
-    #尝试修改4
-    return jsonify({'response': st.session_state.output_response}) 
+    #尝试修改4    
+    return jsonify({'response': full_response}) 
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)
