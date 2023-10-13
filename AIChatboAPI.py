@@ -45,7 +45,7 @@ def starchat(repo_id, myprompt):
 @app.route('/api/chatbot', methods=['POST'])
 def chatbot():
     data = request.get_json()
-    myprompt = data['prompt']
+    myprompt = data['user_question']
     
     # AI Chatbot logic
     if "file_name" not in st.session_state:
@@ -91,8 +91,13 @@ def chatbot():
             asstext = f"assistant: {full_response}"             
             contexts = writehistory(asstext)            
             st.session_state.messages.append({"role": "assistant", "content": full_response})
+            
             #st.session_state.output_response={"content": full_response}
-            st.session_state.output_response={"content": "NICE MEETING YOU"}
+    
+            #st.session_state.output_response={"content": "NICE MEETING YOU"}
+            #这个是有问题的，因为这里就已经将st.session_state.output_response赋值字典形式（json格式？）
+            
+            st.session_state.output_response={"NICE MEETING YOU"}    
 
     #output_response = {
     #    'message': 'AI Chatbot response',
