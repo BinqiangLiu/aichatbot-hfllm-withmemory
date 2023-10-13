@@ -42,25 +42,25 @@ def starchat(repo_id, myprompt):
     reply = llm_reply.partition('<|end|>')[0]    
     return reply
 
+    # AI Chatbot logic
+if "file_name" not in st.session_state:
+    st.session_state["file_name"] = str(uuid.uuid4()) + ".txt"    
+        
+#if "output_response" not in st.session_state:
+    #st.session_state.output_response = {}
+        
+def writehistory(text): 
+    with open(st.session_state["file_name"], 'a+') as f:
+        f.write(text)
+        f.write('\n')
+        f.seek(0) 
+        contexts = f.read()
+    return contexts
+
 @app.route('/api/chatbot', methods=['POST'])
 def chatbot():
     data = request.get_json()
-    myprompt = data['user_question']
-    
-    # AI Chatbot logic
-    if "file_name" not in st.session_state:
-        st.session_state["file_name"] = str(uuid.uuid4()) + ".txt"    
-        
-    if "output_response" not in st.session_state:
-        st.session_state.output_response = {}
-        
-    def writehistory(text):           
-        with open(st.session_state["file_name"], 'a+') as f:
-            f.write(text)
-            f.write('\n')
-            f.seek(0) 
-            contexts = f.read()        
-        return contexts
+    myprompt = data['user_question']    
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
