@@ -30,8 +30,8 @@ av_us = '🧑'
 av_ass = '🤖'
 
 #def starchat(model, myprompt, my_prompt_template):
-def starchat(model, myprompt): 
-    llm = HuggingFaceHub(repo_id=model,
+def starchat(repo_id, myprompt): 
+    llm = HuggingFaceHub(repo_id=repo_id,
                          model_kwargs={"min_length":1024,
                                        "max_new_tokens":5632, "do_sample":True,
                                        "temperature":0.1,
