@@ -14,7 +14,12 @@ from streamlit_extras.colored_header import colored_header
 from streamlit_extras.add_vertical_space import add_vertical_space
 from langchain import PromptTemplate, LLMChain
 
-app = Flask(__name__)
+st.set_page_config(page_title="AI Chatbot 100% Free", layout="wide")
+st.write('完全开源免费的AI智能聊天助手 | Absolute Free & Opensouce AI Chatbot')
+
+css_file = "main.css"
+with open(css_file) as f:
+    st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
 
 load_dotenv()
 HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
@@ -59,6 +64,7 @@ def writehistory(text):
 
 temp_myprompt = st.chat_input("Enter your question here.")
 
+app = Flask(__name__)
 @app.route('/api/chat', methods=['POST'])
 def chat():
     data = request.get_json()
