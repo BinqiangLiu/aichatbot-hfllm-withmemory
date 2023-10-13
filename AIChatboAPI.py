@@ -57,10 +57,13 @@ def writehistory(text):
         contexts = f.read()
     return contexts
 
+temp_myprompt = st.chat_input("Enter your question here.")
+
 @app.route('/api/chatbot', methods=['POST'])
 def chatbot():
     data = request.get_json()
     myprompt = data['user_question']    
+    temp_myprompt=myprompt
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
