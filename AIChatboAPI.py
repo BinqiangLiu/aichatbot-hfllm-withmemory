@@ -21,8 +21,8 @@ HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 repo_id = os.getenv("repo_id")
 port = os.getenv('port')
 
-def starchat(model, myprompt): 
-    llm = HuggingFaceHub(repo_id=model,
+def starchat(repo_id, myprompt): 
+    llm = HuggingFaceHub(repo_id=repo_id,
                          model_kwargs={"min_length":1024,
                                        "max_new_tokens":5632, "do_sample":True,
                                        "temperature":0.1,
@@ -108,6 +108,8 @@ def chatbot():
     #尝试修改2
     #return jsonify({'response': output_response}) 
     #尝试修改3
+    #return jsonify({'response': st.session_state.output_response}) 
+    #尝试修改4
     return jsonify({'response': st.session_state.output_response}) 
 
 if __name__ == '__main__':
