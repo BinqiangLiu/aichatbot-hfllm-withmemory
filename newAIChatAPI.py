@@ -94,12 +94,12 @@ def chat():
                 #st.session_state.full_response = st.session_state.full_response + r + " "                
                 message_placeholder.markdown(st.session_state.full_response + "|")
                 sleep(0.1)                       
-            message_placeholder.markdown(st.session_state.full_response)            
-            asstext = f"assistant: {st.session_state.full_response}"             
+            message_placeholder.markdown(full_response)            
+            asstext = f"assistant: {full_response}"             
             contexts = writehistory(asstext)            
-            st.session_state.messages.append({"role": "assistant", "content": st.session_state.full_response})
+            st.session_state.messages.append({"role": "assistant", "content": full_response})
 
-    return jsonify({"response": st.session_state.full_response})
+    return jsonify({"response": full_response})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)
