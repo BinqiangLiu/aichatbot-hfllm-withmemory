@@ -106,8 +106,7 @@ def chat():
             asstext = f"assistant: {full_response}"             
             contexts = writehistory(asstext)            
             st.session_state.messages.append({"role": "assistant", "content": full_response})
-
-    return jsonify({"response": full_response})
+    return jsonify({"response": "API TEST"})
 
 if __name__ == '__main__':
     #app.run(host='0.0.0.0', port=port)
